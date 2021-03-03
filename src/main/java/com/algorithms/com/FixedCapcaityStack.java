@@ -1,12 +1,15 @@
 package com.algorithms.com;
 
+import java.util.Iterator;
+import java.util.Spliterator;
+
 /**
  * @ClassName: FixedCapcaityStack
  * @Description: TODO
  * @author: wql
  * @date: 2021/3/3  18:02
  */
-public class FixedCapcaityStack<Item> {
+public class FixedCapcaityStack<Item> implements Iterable<Item>{
     private Item[] store;//存放元素
     private int num;//存放元素个数
     private int full;
@@ -41,5 +44,21 @@ public class FixedCapcaityStack<Item> {
         }
         return item;
 
+    }
+
+    @Override
+    public Iterator<Item> iterator() {
+        return new ReerveArrayItrm();
+    }
+    class ReerveArrayItrm implements Iterator<Item>{
+
+       private int i=num;
+       public boolean hasNext(){
+           return i>0;
+       }
+       public Item next(){
+           return store[--num];
+       }
+       public void remove(){}
     }
 }
